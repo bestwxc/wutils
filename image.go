@@ -13,10 +13,12 @@ const (
 	CopyWhenUnsupported = 1
 )
 
+// CompressImage 压缩图片
 func CompressImage(sourcePath string, targetPath string, format string, quality int) error {
 	return CompressImageExt(sourcePath, targetPath, format, quality, DefaultFileMode, CopyWhenUnsupported)
 }
 
+// CompressImageExt 压缩图片的扩展方法
 func CompressImageExt(sourcePath string, targetPath string, format string, quality int, perm os.FileMode, unsupported int) error {
 	if len(format) > 0 && !SupportFormat(format) {
 		panic("目标格式不支持,format:" + format)
@@ -66,6 +68,7 @@ func CompressImageExt(sourcePath string, targetPath string, format string, quali
 	return nil
 }
 
+// SupportFormat 是否支持图片格式
 func SupportFormat(format string) bool {
 	return format == "jpeg" || format == "png" || format == "gif"
 }
